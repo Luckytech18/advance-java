@@ -24,14 +24,15 @@ public class TestConnection {
 		Statement stmt = conn.createStatement();
 		
 		//4. Execute Query and get Resultset
-		ResultSet rs = stmt.executeQuery("select * from marksheet");
+		ResultSet rs = stmt.executeQuery("select * from cricket");
 		
 		while(rs.next()) {
 			System.out.print("\t" + rs.getInt(1));
 			System.out.print("\t" + rs.getString(2));
-			System.out.print("\t" + rs.getInt(3));
+			System.out.print("\t" + rs.getString(3));
 			System.out.print("\t" + rs.getInt(4));
-			System.out.println("\t" + rs.getInt(5));
+			System.out.print("\t" + rs.getInt(5));
+			System.out.println("\t"+ rs.getDouble(6));
 			
 		}
 		conn.close();

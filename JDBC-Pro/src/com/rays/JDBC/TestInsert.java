@@ -12,15 +12,14 @@ public class TestInsert {
 				Class.forName("com.mysql.cj.jdbc.Driver");
 
 				// 2. Make connection to the database
-				Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/mydb", "root", "root");
+				Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/mydb" , "root" , "root" );
 
 				// 3. Create Statement
 				Statement stmt = conn.createStatement();
 
 				// 4. Execute Query and get ResultSet
-				int i = stmt.executeUpdate("insert into marksheet values(17, 'Suresh', 45, 65, 75),(18, 'Mukesh', 69, 36, 41)");
-				
-				System.out.println("Data inserted successfully" + i);
+				int i = stmt.executeUpdate("insert into cricket values(12, 'raina', 'Batsman', 65, 75 , 90.00)");
+				System.out.println("Data inserted successfully" +"/t" + i);
 				
 				conn.close();
 				
