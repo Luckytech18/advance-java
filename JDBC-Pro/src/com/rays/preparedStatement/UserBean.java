@@ -9,7 +9,7 @@ public class UserBean {
 	private String lastName;
 	private String login;
 	private String password;
-	private Date date;
+	private Date dob;
 	public int getId() {
 		return id;
 	}
@@ -40,11 +40,11 @@ public class UserBean {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	public Date getDate() {
-		return date;
+	public Date getdob() {
+		return dob;
 	}
-	public void setDate(Date date) {
-		this.date = date;
+	public void setDate(Date dob) {
+		this.dob = dob;
 	}
 	
 	
