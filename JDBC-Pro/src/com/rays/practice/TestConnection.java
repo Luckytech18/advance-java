@@ -15,7 +15,7 @@ public class TestConnection {
 		
 		Statement stmt = conn.createStatement();
 		
-		ResultSet rs = stmt.executeQuery("select * from task");
+		ResultSet rs = stmt.executeQuery("select * from corporate");
 		
 		while(rs.next()) {
 		
