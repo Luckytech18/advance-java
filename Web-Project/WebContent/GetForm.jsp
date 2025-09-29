@@ -11,9 +11,9 @@
 <%
 String firstname = request.getParameter("FirstName");
 String Lastname = request.getParameter("LastName");
-String login = request.getParameter("login");
+String login = request.getParameter("Login");
 String password = request.getParameter("Password");
-String dob = request.getParameter("dob");
+String dob = request.getParameter("Dob");
 %>
 
 <h1><%=firstname %></h1>
