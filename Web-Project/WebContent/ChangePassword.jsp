@@ -7,13 +7,16 @@
 <title>Insert title here</title>
 </head>
 <body>
+
 	<%
 		String successMsg = (String) request.getAttribute("successMsg");
 		String errorMsg = (String) request.getAttribute("errorMsg");
 	%>
+
 	<%@ include file="Header.jsp"%>
 	<div align="center">
-		<h1>Login View</h1>
+		<h1>Change Password</h1>
+
 		<%
 			if (errorMsg != null) {
 		%>
@@ -28,29 +31,34 @@
 		<%
 			}
 		%>
-		<form action="LoginCtl" method="post">
 
+		<form action="ChangePasswordCtl" method="post">
 			<table>
-
 				<tr>
-					<th>Login</th>
-					<td><input type="email" name="Login" value=""
-						placeholder="Enter your emaill"></td>
+					<th>LogIn</th>
+					<td><input type="email" name="login" value=""
+						placeholder="Enter Your Email"></td>
 				</tr>
 
 				<tr>
-					<th>Password</th>
-					<td><input type="Password" name="Password" value=""
-						placeholder="Enter Your Password"></td>
+					<th>OldPassword</th>
+					<td><input type="password" name="oldPassword" value=""
+						placeholder="Enter Your password"></td>
 				</tr>
+
+				<tr>
+					<th>NewPassword</th>
+					<td><input type="password" name="newPasssword" value=""
+						placeholder="Enter New Password"></td>
+				</tr>
+
 				<tr>
 					<th></th>
-					<td><input type="submit" value="SignIn" name="operation"></td>
+					<td><input type="submit" name="operation" value="save"></td>
 				</tr>
 			</table>
+
 		</form>
-
 	</div>
-
 </body>
 </html>
