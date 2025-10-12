@@ -13,21 +13,37 @@ import javax.servlet.http.HttpServletResponse;
 import com.rays.bean.UserBean;
 import com.rays.model.UserModel;
 
-
 @WebServlet("/UserViewCtl")
 public class UserViewCtl extends HttpServlet {
-	
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		response.sendRedirect("UserView.jsp");
+
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		UserModel model = new UserModel();
+		UserBean bean = new UserBean();
+
+		String id = request.getParameter("id");
+		System.out.println("-->>>>" + id);
+		if (id != null) {
+			try {
+				bean = model.findById(Integer.parseInt(id));
+				request.setAttribute("bean", bean);
+			} catch (Exception e) {
+
+				e.printStackTrace();
+			}
+			RequestDispatcher rd = request.getRequestDispatcher("UserView.jsp");
+			rd.forward(request, response);
+		}
 	}
 
-	
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 
+		String op = request.getParameter("operation");
+		
 		UserBean bean = new UserBean();
 		UserModel model = new UserModel();
+		
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 
 		String firstName = request.getParameter("firstName");
@@ -42,9 +58,18 @@ public class UserViewCtl extends HttpServlet {
 			bean.setLogin(login);
 			bean.setPassword(password);
 			bean.setdob(sdf.parse(dob));
-			model.add(bean);
 			
-			request.setAttribute("successMsg","User Added Successfully" );
+			
+			if(op.equals("Update")) {
+				bean.setId(Integer.parseInt(request.getParameter("id")));
+				model.update(bean);
+				request.setAttribute("successMsg", "User updated Successfully");
+			} else {
+				model.add(bean);
+				request.setAttribute("successMsg", "User added Successfully");
+			}
+
+			
 		} catch (Exception e) {
 			request.setAttribute("errorMsg", e.getMessage());
 			e.printStackTrace();
@@ -55,6 +80,3 @@ public class UserViewCtl extends HttpServlet {
 	}
 
 }
-
-
-
