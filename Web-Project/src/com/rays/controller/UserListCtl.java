@@ -1,6 +1,9 @@
 package com.rays.controller;
 
 import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -13,7 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.rays.bean.UserBean;
 import com.rays.model.UserModel;
 
-@WebServlet("/UserListCtl")
+@WebServlet("/UserListCtl.do")
 public class UserListCtl extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -22,9 +25,16 @@ public class UserListCtl extends HttpServlet {
 		UserModel model = new UserModel();
 		UserBean bean = new UserBean();
 
+		int pageNo = 1;
+		int pageSize = 5;
+
 		try {
-			List list = model.search(bean);
+			List list = model.search(bean, pageNo, pageSize);
+			List nextList = model.search(bean, pageNo + 1, pageSize);
+			request.setAttribute("pageNo", pageNo);
 			request.setAttribute("list", list);
+			request.setAttribute("pageSize", pageSize);
+			request.setAttribute("nextList", nextList);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -38,9 +48,13 @@ public class UserListCtl extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		UserModel model = new UserModel();
 		UserBean bean = new UserBean();
 		String op = request.getParameter("operation");
+
+		int pageNo = 1;
+		int pageSize = 5;
 
 		String[] ids = request.getParameterValues("ids");
 
@@ -60,13 +74,34 @@ public class UserListCtl extends HttpServlet {
 			}
 
 		}
-		if(op.equals("search")) {
+		if (op.equals("search")) {
 			bean.setFirstName(request.getParameter("firstName"));
+			bean.setLastName(request.getParameter("lastName"));
+			bean.setLogin(request.getParameter("login"));
+			try {
+				bean.setdob(sdf.parse(request.getParameter("dob")));
+			} catch (ParseException e) {
+
+				e.printStackTrace();
+			}
+
+		}
+		if (op.equals("next")) {
+			pageNo = Integer.parseInt(request.getParameter("pageNo"));
+			pageNo++;
+		}
+
+		if (op.equals("previous")) {
+			pageNo = Integer.parseInt(request.getParameter("pageNo"));
+			pageNo--;
 		}
 
 		try {
-			List list = model.search(bean);
+			List list = model.search(bean, pageNo, pageSize);
+			List nextList = model.search(bean, pageNo + 1, pageSize);
+			request.setAttribute("pageNo", pageNo);
 			request.setAttribute("list", list);
+			request.setAttribute("nextList", nextList);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

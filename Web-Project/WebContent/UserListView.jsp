@@ -11,9 +11,11 @@
 <body>
 
 	<%
-	List list = (List) request.getAttribute("list");
-	String successMsg = (String) request.getAttribute("successMsg");
-	String errorMsg = (String) request.getAttribute("errorMsg");
+		List list = (List) request.getAttribute("list");
+		String successMsg = (String) request.getAttribute("successMsg");
+		String errorMsg = (String) request.getAttribute("errorMsg");
+		int pageNo = (int) request.getAttribute("pageNo");
+		List nextList = (List) request.getAttribute("nextList");
 	%>
 
 	<%@ include file="Header.jsp"%>
@@ -21,30 +23,44 @@
 
 		<h3>User List</h3>
 		<%
-		if (successMsg != null) {
+			if (successMsg != null) {
 		%>
 		<h3 style="color: green;"><%=successMsg%></h3>
 		<%
-		}
+			}
 		%>
 
 		<%
-		if (errorMsg != null) {
+			if (errorMsg != null) {
 		%>
 		<h3 style="color: red;"><%=errorMsg%></h3>
 		<%
-		}
+			}
 		%>
-		<form action="UserListCtl" method="post">
-		
-		<table>
-		<tr>
-		<th>First Name</th>
-		<td><input type="text" name="firstName" value=""
-		placeholder="Search by first Name"></td>
-		<td><input type="submit" name="operation" value="search"></td>
-		</tr>
-		</table>
+		<form action="UserListCtl.do" method="post">
+
+			<table>
+				<tr>
+					<th>First Name</th>
+					<td><input type="text" name="firstName" value=""
+						placeholder="Search by first Name"></td>
+					<td><input type="submit" name="operation" value="search"></td>
+					<th>Last Name</th>
+					<td><input type="text" name="lastName" value=""
+						placeholder="Search by last Name"></td>
+					<td><input type="submit" name="operation" value="search">
+					</td>
+					<th>Login</th>
+					<td><input type="email" name="login" value=""
+						placeholder="Search by login"></td>
+					<td><input type="submit" name="operation" value="search">
+					</td>
+					<th>dob</th>
+					<td><input type="date" name="dob" value=""></td>
+					<td><input type="submit" name="operation" value="search">
+					</td>
+				</tr>
+			</table>
 
 			<table border="1px" width="100%">
 
@@ -59,12 +75,12 @@
 				</tr>
 
 				<%
-				Iterator<UserBean> it = list.iterator();
+					Iterator<UserBean> it = list.iterator();
 				%>
 
 				<%
-				while (it.hasNext()) {
-					UserBean bean = it.next();
+					while (it.hasNext()) {
+						UserBean bean = it.next();
 				%>
 				<tr align="center" style="background-color: #D3D3D3">
 					<td><input type="checkbox" value="<%=bean.getId()%>"
@@ -77,19 +93,25 @@
 					<td><a href="UserViewCtl?id=<%=bean.getId()%>">edit</a></td>
 				</tr>
 				<%
-				}
+					}
 				%>
 			</table>
 
-			<table>
+			<table width="100%">
 				<tr>
 					<th></th>
+					<td><input type="submit" name="operation" value="previous"
+						<%=pageNo == 1 ? "disabled" : ""%>></td>
 					<td><input type="submit" name="operation" value="delete"></td>
+					<td align="right"><input type="submit" name="operation"
+						value="next" <%=nextList.size() == 0 ? "disabled" : ""%>></td>
 				</tr>
+				
 			</table>
+			<input type="hidden" name="pageNo" value="<%=pageNo%>">
 
 		</form>
 	</div>
-	
+
 </body>
 </html>
