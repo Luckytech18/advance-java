@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.rays.bean.UserBean;
 import com.rays.model.UserModel;
 
-@WebServlet("/UserViewCtl")
+@WebServlet("/UserViewCtl.do")
 public class UserViewCtl extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -31,9 +31,9 @@ public class UserViewCtl extends HttpServlet {
 
 				e.printStackTrace();
 			}
-			RequestDispatcher rd = request.getRequestDispatcher("UserView.jsp");
-			rd.forward(request, response);
 		}
+		RequestDispatcher rd = request.getRequestDispatcher("UserView.jsp");
+		rd.forward(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)

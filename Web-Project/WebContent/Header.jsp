@@ -25,7 +25,7 @@
 	<% if(user != null){ %>
 	<a href="LoginCtl?operation=logout">Logout</a> |
 	<a href="UserListCtl.do">User List</a> |
-	<a href="UserViewCtl">Add User</a> |
+	<a href="UserViewCtl.do">Add User</a> |
 	<a href="ChangePasswordCtl">ChangePassword</a> 
 	<%}else{ %>
     <a href="LoginCtl">Login</a> |

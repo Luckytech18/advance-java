@@ -90,7 +90,7 @@
 					<td><%=bean.getLastName()%></td>
 					<td><%=bean.getLogin()%></td>
 					<td><%=bean.getdob()%></td>
-					<td><a href="UserViewCtl?id=<%=bean.getId()%>">edit</a></td>
+					<td><a href="UserViewCtl.do?id=<%=bean.getId()%>">edit</a></td>
 				</tr>
 				<%
 					}

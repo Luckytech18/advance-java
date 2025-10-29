@@ -35,13 +35,13 @@
 				<tr>
 					<th>Login</th>
 					<td><input type="email" name="Login" value=""
-						placeholder="Enter your emaill"></td>
+						placeholder="Enter your emaill"><span style="color:red"><%=request.getAttribute("Login")!= null ? request.getAttribute("Login") : "" %></span></td>
 				</tr>
 
 				<tr>
 					<th>Password</th>
 					<td><input type="Password" name="Password" value=""
-						placeholder="Enter Your Password"></td>
+						placeholder="Enter Your Password"><span style="color:red"><%=request.getAttribute("Password")!= null ? request.getAttribute("Password") : "" %></span></td>
 				</tr>
 				<tr>
 					<th></th>
