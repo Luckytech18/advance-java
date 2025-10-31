@@ -17,12 +17,18 @@ public class DataValidator {
 			System.out.println("FirstName is required");
 			isValid = false;
 
+		} else if (!(request.getParameter("FirstName").endsWith("1234567890"))) {
+			request.setAttribute("FirstName", "Charachter contains only");
+			isValid = false;
 		}
 		if (request.getParameter("LastName") == "") {
 			request.setAttribute("LastName", "LastName is required");
 			System.out.println("LastName is required");
 			isValid = false;
 
+		} else if (!(request.getParameter("LastName").endsWith("1234567890"))) {
+			request.setAttribute("LastName", "Charachter contains only");
+			isValid = false;
 		}
 		if (request.getParameter("Login") == "") {
 			request.setAttribute("Login", "Login is required");

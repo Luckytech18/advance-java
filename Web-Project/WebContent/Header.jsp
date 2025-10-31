@@ -26,7 +26,9 @@
 	<a href="LoginCtl?operation=logout">Logout</a> |
 	<a href="UserListCtl.do">User List</a> |
 	<a href="UserViewCtl.do">Add User</a> |
-	<a href="ChangePasswordCtl">ChangePassword</a> 
+	<a href="ChangePasswordCtl">ChangePassword</a> |
+	<a href="AddBankCtl">AddBank</a>|
+	<a href="BankListCtl">BankList</a>
 	<%}else{ %>
     <a href="LoginCtl">Login</a> |
 	<a href="UserRegistrationCtl">SignUp</a>
